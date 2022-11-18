@@ -1,0 +1,38 @@
+#include "LiquidCrystal.h"
+LiquidCrystal lcd(8,7,6,5,4,3);
+
+int Flex_VAL = 0;
+
+void setup()
+{
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+  lcd.begin(16,2);
+  
+  lcd.setCursor(0,0);
+  lcd.print("Flex Sensor VALUE");
+
+  pinMode(10, OUTPUT);
+
+ 
+}
+
+void loop()
+{
+  Flex_VAL = analogRead(A0);
+  Serial.println(Flex_VAL);
+  
+  lcd.setCursor(0,1);
+  lcd.print(Flex_VAL);
+
+ if (Flex_VAL > 500)
+ {
+    digitalWrite(10, HIGH);
+  }
+ else
+ {
+    digitalWrite(10, LOW);
+  }
+  
+  delay(10); // Delay a little bit to improve simulation performance
+}
